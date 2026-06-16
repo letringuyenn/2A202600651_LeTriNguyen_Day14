@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "version": "Agent_V2_Optimized",
+    "agent_mode": "retrieval",
+    "pipeline_modules": [
+      "engine.retrieval_eval",
+      "engine.llm_judge",
+      "engine.runner",
+      "agent.retrieval_agent_adapter",
+      "engine.answer_generator"
+    ],
+    "retriever_type": "keyword_overlap",
+    "generator_type": "grounded_synthesis",
+    "runner_mode": "async",
+    "async_enabled": true,
+    "batch_size": 5,
+    "judge_models": [
+      "gpt-4o",
+      "claude-3-5-sonnet"
+    ],
+    "consensus_rule": "average_when_agree_conservative_min_on_conflict",
+    "conflict_threshold": 1.0,
+    "position_bias_check_available": true,
+    "total": 51,
+    "passed": 34,
+    "failed": 17,
+    "pass_rate": 0.667,
+    "timestamp": "2026-06-17 00:51:46",
+    "total_benchmark_time_sec": 1.26
+  },
+  "metrics": {
+    "avg_score": 3.464,
+    "avg_faithfulness": 0.487,
+    "avg_relevancy": 0.562,
+    "hit_rate": 0.843,
+    "mrr": 0.729,
+    "agreement_rate": 1.0,
+    "avg_latency_sec": 0.0019
+  },
+  "regression": {
+    "decision": "APPROVE",
+    "delta_score": 0.0,
+    "delta_hit_rate": 0.0,
+    "delta_latency": 0.0,
+    "reasons": [
+      "Quality: +0.000 | Hit Rate: +0.000 | Latency: +0.000s"
+    ]
+  },
+  "cost_report": {
+    "total_input_tokens": 48122,
+    "total_output_tokens": 21145,
+    "total_api_calls": 102,
+    "total_cost_usd": 0.331755,
+    "total_estimated_cost_usd": 0.331755,
+    "cost_per_eval_usd": 0.003253,
+    "optimized_cost_usd": 0.144645,
+    "estimated_savings_pct": 56.4,
+    "cost_saving_proposal": "Route easy cases to a cheaper judge/generator and reserve the stronger model for hard, adversarial, and low-confidence cases.",
+    "latency_cost_tradeoff": "Async batching keeps wall-clock latency low; model routing is the main lever for reducing token cost without changing dataset coverage."
+  }
+}
